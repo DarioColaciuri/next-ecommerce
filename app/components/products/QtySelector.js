@@ -2,18 +2,24 @@
 import { useState } from "react"
 import Counter from "../ui/Counter"
 import Button from "../ui/Button"
+import { useCartContext } from "../context/CartContext"
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const QtySelector = ({item}) => {
+const QtySelector = ({ item }) => {
+    const { agregar } = useCartContext()
     const [quantity, setQuantity] = useState(1)
 
     const handleAdd = () => {
-        console.log({...item, quantity})
+        setQuantity(quantity);
+        agregar(item, quantity)
+        toast.success(`${quantity} ${item.title} agregado al carrito`);
     }
 
     return (
         <div className="flex flex-col gap-5 mt-6">
-            <Counter max={item.stock} counter={quantity} setCounter={setQuantity} />
-            <Button className="w-full hover:bg-gray-700 hover:border-gray-900 hover:border-2" onClick={handleAdd}>Add to cart</Button>
+                    <Counter quantity={quantity} setQuantity={setQuantity} />
+                    <Button className="w-full hover:bg-blue-600" onClick={handleAdd}>Agregar al carrito</Button>
         </div>
     )
 }

@@ -13,6 +13,8 @@ const Header = () => {
 
             <Link href="/">
                 <Image
+                    className='h-auto w-auto'
+                    priority={true}
                     src={"https://i.pinimg.com/originals/20/60/2d/20602d43cc993811e5a6bd1886af4f33.png"}
                     alt="logo"
                     width={100}

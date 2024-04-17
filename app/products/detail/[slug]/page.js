@@ -2,7 +2,7 @@ import ProductDetail from "../../../components/products/ProductDetail"
 
 export async function generateMetadata ({params, searchParams}, parent) {
     return {
-        title: `Products - ${params.categories}`
+        title: `Products - ${params.slug}`
     }
 }
 

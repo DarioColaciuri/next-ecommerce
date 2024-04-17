@@ -1,0 +1,146 @@
+.formulario {
+    display: flex;
+    flex-direction: column;
+    width: 35vw;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: rgb(145, 158, 158);
+  }
+  
+  input {
+    height: 2rem;
+    text-align: center;
+  }
+  
+  .enviar {
+    background-color: rgb(34, 189, 80);
+    color: black;
+    font-weight: 900;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    border: solid rgb(39, 39, 39) 1px;
+  }
+  
+  .cambios-btn {
+    background-color: rgb(182, 207, 36);
+    color: black;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    border: solid rgb(39, 39, 39) 1px;
+  }
+  
+  .enviar:hover {
+    box-shadow: inset 0 0 0 50px #38e47ad2;
+    border: solid white 1px;
+    font-weight: 900;
+    color: black;
+    animation-name: bounce;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-iteration-count: 3s;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    cursor: pointer;
+  }
+  
+  .cambios-btn:hover {
+    box-shadow: inset 0 0 0 50px #d9f882d2;
+    border: solid white 1px;
+    font-weight: 900;
+    color: black;
+    animation-name: bounce;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-iteration-count: 3s;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    cursor: pointer;
+  }
+  
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    25%,
+    75% {
+      transform: scale(0.9);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+  .resumen {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .producto-resumen {
+    display: flex;
+    flex-direction: row;
+    min-width: 80vw;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(
+      -50deg,
+      rgb(37, 37, 37) 0%,
+      rgb(95, 95, 95) 49%,
+      rgb(133, 132, 132) 100%
+    );
+    border: solid rgb(39, 39, 39) 1px;
+    box-shadow: rgba(36, 36, 36, 0.212) 0.5rem 0.5rem;
+    border-radius: 2rem;
+  }
+  
+  .producto-resumen:hover {
+    background: linear-gradient(
+      -50deg,
+      rgb(73, 80, 48) 0%,
+      rgb(141, 151, 94) 49%,
+      rgb(203, 228, 147) 100%
+    );
+    cursor: default;
+  }
+  
+  .pedido-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(
+      -50deg,
+      rgb(37, 37, 37) 0%,
+      rgb(95, 95, 95) 49%,
+      rgb(133, 132, 132) 100%
+    );
+    border: solid rgb(39, 39, 39) 1px;
+    box-shadow: rgba(36, 36, 36, 0.212) 0.5rem 0.5rem;
+    padding: 2rem;
+    border-radius: 2rem;
+  }
+  
+  .pedido-texto {
+    padding-bottom: 1rem;
+  }
+  
+  .numero-pedido {
+    padding: 1rem;
+    border-radius: 2rem;
+  }
+  
+  .numero-pedido:hover {
+    background-color: rgb(203, 228, 147);
+    color: black;
+    font-weight: 900;
+  }
+  
+  .producto-detail-titulo {
+    text-align: center;
+  }
