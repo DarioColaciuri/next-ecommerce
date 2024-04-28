@@ -1,13 +1,41 @@
+"use client"
 import Image from "next/image"
 import QtySelector from "./QtySelector"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "@/app/firebase/config"
+import { useEffect, useState } from "react"
+import Spinner from "./spinner"
 
-const ProductDetail = async ({slug}) => {
-    const item = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`, {
-        cache: "no-store",
-        // next: {
-        //     revalidate: 0
-        // }
-    }).then(r => r.json())
+// const ProductDetail = async ({slug}) => {
+//     const item = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`, {
+//         cache: "no-store",
+//     }).then(r => r.json())
+
+const ProductDetail = ({ slug }) => {
+    const [item, setItem] = useState(null);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const docRef = doc(db, "products", slug);
+                const docSnapshot = await getDoc(docRef);
+                if (docSnapshot.exists()) {
+                    const productData = docSnapshot.data();
+                    setItem(productData);
+                } else {
+                    console.error("No se encontró el producto con el slug proporcionado.");
+                }
+            } catch (error) {
+                console.error("Error al obtener el producto:", error);
+            }
+        };
+
+        fetchProduct();
+    }, [slug]);
+
+    if (!item) {
+        return <Spinner />;
+    }
 
     return (
         <div className="max-w-4xl mt-2 m-auto text-white w-full h-full bg-gray-600 p-9 rounded-2xl">
@@ -33,7 +61,7 @@ const ProductDetail = async ({slug}) => {
                 <p className="text-white pb-12">{item.description}</p>
             </section>
         </div>
-    )
-}
+    );
+};
 
-export default ProductDetail
+export default ProductDetail;
