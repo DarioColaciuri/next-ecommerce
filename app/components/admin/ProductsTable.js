@@ -3,7 +3,7 @@ import Image from "next/image"
 
 
 const ProductsTable = async () => {
-    const items = await fetch('http://localhost:3000/api/products/all', {
+    const items = await fetch(`http://${process.env.VERCEL_URL}:3000/api/products/all`, {
         cache: 'no-store'
     }).then(r => r.json())
     return (
