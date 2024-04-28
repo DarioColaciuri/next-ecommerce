@@ -4,7 +4,6 @@ import QtySelector from "./QtySelector"
 import { doc, getDoc } from "firebase/firestore"
 import { db } from "@/app/firebase/config"
 import { useEffect, useState } from "react"
-import Spinner from "./spinner"
 
 // const ProductDetail = async ({slug}) => {
 //     const item = await fetch(`http://${process.env.VERCEL_URL}/api/product/${slug}`, {
@@ -34,7 +33,7 @@ const ProductDetail = ({ slug }) => {
     }, [slug]);
 
     if (!item) {
-        return <div> <Spinner /> </div>;
+        return <div>Cargando...</div>;
     }
 
     return (
