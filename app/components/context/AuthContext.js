@@ -67,7 +67,7 @@ export const AuthProvider = ({children}) => {
                 router.push('/products/all');
             }
         }
-    }, [user.logged, user.email]);
+    }, [user.logged, user.email, router]);
 
     return (
         <AuthContext.Provider value={{

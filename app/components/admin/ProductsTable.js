@@ -39,7 +39,7 @@ const ProductsTable = async () => {
                 </thead>
                 <tbody>
                     {items.map((product) => (
-                        <tr className="bg-white border-b">
+                        <tr key={product.slug} className="bg-white border-b">
                             <td className="p-2">{product.title}</td>
                             <td className="p-2">{product.category}</td>
                             <td className="p-2">{product.price}</td>

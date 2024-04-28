@@ -4,6 +4,7 @@ import "./Cart.css"
 import { db } from "../firebase/config";
 import { doc, setDoc } from "firebase/firestore";
 import { useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useAuthContext } from "../components/context/AuthContext";
 
@@ -36,10 +37,12 @@ const Cart = () => {
                     className="producto-container producto-container-cart items-center border-b-2 border-slate-600 mb-1"
                     key={prod.slug}
                 >
-                    <img
+                    <Image
                         className="producto-imagen-cart"
                         src={prod.image}
                         alt={prod.title}
+                        width={200}
+                        height={200}
                     />
                     <h2>{prod.title}</h2>
                     <p>${prod.price * prod.quantity}</p>
