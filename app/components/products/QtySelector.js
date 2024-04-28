@@ -3,14 +3,21 @@ import { useState } from "react"
 import Counter from "../ui/Counter"
 import Button from "../ui/Button"
 import { useCartContext } from "../context/CartContext"
+import { useAuthContext } from "../context/AuthContext"
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const QtySelector = ({ item }) => {
     const { agregar } = useCartContext()
+    const { user } = useAuthContext()
     const [quantity, setQuantity] = useState(1)
 
     const handleAdd = () => {
+        if (!user.logged) {
+            toast.error("Necesitas iniciar sesión para añadir productos al carrito");
+            return;
+        }
+
         setQuantity(quantity);
         agregar(item, quantity)
         toast.success(`${quantity} ${item.title} agregado al carrito`);

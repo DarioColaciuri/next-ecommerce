@@ -1,18 +1,32 @@
 "use client"
 import { useCartContext } from "../components/context/CartContext";
 import "./Cart.css"
+import { db } from "../firebase/config";
+import { doc, setDoc } from "firebase/firestore";
+import { useEffect } from "react";
 import Link from "next/link";
+import { useAuthContext } from "../components/context/AuthContext";
+
 
 const Cart = () => {
+    const { user } = useAuthContext();
     const { cart, setCart, precioTotal, vaciar } = useCartContext();
 
     const vaciarBtn = () => {
         vaciar();
     };
 
-    const borrar = (productId) => {
+    const borrar = async (productId) => {
         const nuevoCarrito = cart.filter((prod) => prod.slug !== productId);
         setCart(nuevoCarrito);
+        if (user.logged) {
+            try {
+                const docRef = doc(db, "carts", user.uid);
+                await setDoc(docRef, { items: nuevoCarrito });
+            } catch (error) {
+                console.error("Error al actualizar el carrito del usuario:", error);
+            }
+        }
     };
 
     return (

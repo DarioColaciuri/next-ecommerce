@@ -4,7 +4,7 @@ import CartWidget from './CartWidget'
 import Link from 'next/link'
 import Navbar from './Navbar'
 import "bootstrap-icons/font/bootstrap-icons.css";
-
+import UserWidget from './UserWidget'
 
 const Header = () => {
 
@@ -26,10 +26,7 @@ const Header = () => {
             
             <div className='flex justify-between items-center gap-5'>
                 <CartWidget />
-                <Link href="/user">
-                <i className="bi bi-person-fill text-2xl"></i>
-                </Link>
-
+                <UserWidget />
             </div>
         </header>
     )

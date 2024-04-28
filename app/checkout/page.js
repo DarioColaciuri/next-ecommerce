@@ -7,15 +7,22 @@ import Link from "next/link";
 import "./checkout.css"
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuthContext } from "../components/context/AuthContext";
 
 const CheckOut = () => {
     const [pedidoId, setPedidoId] = useState("");
     const { cart, precioTotal, vaciar } = useCartContext();
+    const { user } = useAuthContext();
 
-    const comprar = () => {
+    const comprar = async () => {
+        if (!user.logged) {
+            toast.error("Debes iniciar sesión para completar la compra");
+            return;
+        }
         const pedido = {
             cliente: {
-                email: "placerholder@placeholder.com",
+                email: user.email,
+                uid: user.uid,
             },
             productos: cart,
             total: precioTotal(),
@@ -23,17 +30,15 @@ const CheckOut = () => {
 
         const pedidosRef = collection(db, "orders");
 
-        addDoc(pedidosRef, pedido)
-            .then((doc) => {
-                setPedidoId(doc.id);
-                vaciar();
-            })
-            .catch((error) => {
-                toast.error("Error con la compra", error);
-            })
-            .finally(() => {
-                toast.success("Gracias por tu compra");
-            });
+        try {
+            const docRef = await addDoc(pedidosRef, pedido);
+            setPedidoId(docRef.id);
+            vaciar();
+            toast.success("¡Gracias por tu compra!");
+        } catch (error) {
+            console.error("Error al realizar la compra:", error);
+            toast.error("Error al realizar la compra");
+        }
     };
 
     if (pedidoId) {
