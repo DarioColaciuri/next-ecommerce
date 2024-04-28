@@ -34,7 +34,7 @@ const ProductDetail = ({ slug }) => {
     }, [slug]);
 
     if (!item) {
-        return <Spinner />;
+        return <div> <Spinner /> </div>;
     }
 
     return (
