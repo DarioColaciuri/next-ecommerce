@@ -10,6 +10,7 @@ const LoginForm = () => {
         email: '',
         password: ''
     })
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         setValues({
@@ -19,7 +20,21 @@ const LoginForm = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        
+        try {
+            await loginUser(values);
+        } catch (error) {
+            setError("Usuario o contraseña invalidas");
+        }
+    }
+
+    const handleGoogleLogin = async () => {
+        try {
+            await googleLogin();
+        } catch (error) {
+            setError(error.message);
+        }
     }
 
     return (
@@ -44,10 +59,11 @@ const LoginForm = () => {
                     name="password"
                     onChange={handleChange}
                 />
+                {error && <div className="text-red-500">{error}</div>}
                 <div className="flex flex-col justify-center items-center gap-5">
                     <div className="flex justify-center items-center gap-5">
-                        <Button onClick={() => loginUser(values)} >Ingresar</Button>
-                        <Button onClick={googleLogin} ><i className="bi bi-google"></i></Button>
+                        <Button type="submit">Ingresar</Button>
+                        <Button onClick={handleGoogleLogin}><i className="bi bi-google"></i></Button>
                     </div>
                     <div className="flex justify-center items-center gap-5">
                         <h3>¿No tienes cuenta?</h3>

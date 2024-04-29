@@ -11,7 +11,7 @@ import { useAuthContext } from "../components/context/AuthContext";
 
 const Cart = () => {
     const { user } = useAuthContext();
-    const { cart, setCart, precioTotal, vaciar } = useCartContext();
+    const { cart = [], setCart, precioTotal, vaciar } = useCartContext();
 
     const vaciarBtn = () => {
         vaciar();

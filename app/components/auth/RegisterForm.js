@@ -10,6 +10,7 @@ const RegisterForm = () => {
         email: '',
         password: ''
     })
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         setValues({
@@ -19,7 +20,26 @@ const RegisterForm = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        
+        if (values.password.length < 6) {
+            setError("La contraseña debe tener al menos 6 caracteres");
+            return;
+        }
+        
+        try {
+            await registerUser(values);
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+
+    const handleGoogleLogin = async () => {
+        try {
+            await googleLogin();
+        } catch (error) {
+            setError(error.message);
+        }
     }
 
     return (
@@ -44,9 +64,10 @@ const RegisterForm = () => {
                     name="password"
                     onChange={handleChange}
                 />
+                {error && <div className="text-red-500">{error}</div>}
                 <div className="flex flex-col justify-center items-center gap-5">
-                    <Button onClick={() => registerUser(values)}>Registrarme</Button>
-                    <Button onClick={googleLogin} className="mt-2 block"><i class="bi bi-google"></i></Button>
+                    <Button type="submit">Registrarme</Button>
+                    <Button onClick={handleGoogleLogin} className="mt-2 block"><i class="bi bi-google"></i></Button>
                     <div className="flex justify-center items-center gap-5">
                         <h3>¿Ya tienes cuenta?</h3>
                         <Button><Link href="/user/login">Iniciar Sesion</Link></Button>
